@@ -8,8 +8,8 @@ export function FinalCTA({ onOpenModal }: FinalCTAProps) {
   return (
     <section className="py-20 bg-gradient-to-b from-[#0A0E1A] to-background relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,107,53,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,140,66,0.1),transparent_50%)]"></div>
 
       <div className="max-w-5xl mx-auto px-6 relative">
         <div className="bg-gradient-to-br from-primary via-primary/90 to-accent rounded-3xl p-12 lg:p-16 shadow-2xl shadow-primary/20">

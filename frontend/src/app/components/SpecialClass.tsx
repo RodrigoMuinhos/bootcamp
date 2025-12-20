@@ -63,7 +63,7 @@ export function SpecialClass() {
                 href="https://www.linkedin.com/in/murilomuinhos/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#0A66C2] hover:bg-[#0A66C2]/90 text-white rounded-full transition-all duration-200 font-semibold shadow-lg shadow-blue-500/30"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white rounded-full transition-all duration-200 font-semibold shadow-lg shadow-orange-500/30"
               >
                 <Linkedin className="w-5 h-5" />
                 Connect

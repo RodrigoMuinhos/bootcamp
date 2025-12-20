@@ -43,8 +43,8 @@ export function Hero({ onOpenModal, onShowRoadmap }: HeroProps) {
   return (
     <section className="relative bg-gradient-to-b from-[#0A0E1A] via-[#111827] to-background overflow-hidden pt-16 pb-12">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,107,53,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(255,140,66,0.1),transparent_50%)]"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="grid md:grid-cols-2 gap-12 items-center">
