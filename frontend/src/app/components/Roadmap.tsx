@@ -105,10 +105,10 @@ const weeks: Week[] = [
   },
   {
     number: 8,
-    title: "Autenticação, Segurança & LGPD",
+    title: "Auth, Segurança & LGPD",
     objective: "Tornar o sistema real e responsável",
     topics: [
-      "Login e autenticação",
+      "Login e auth",
       "JWT",
       "Perfis de usuário",
       "Proteção de rotas",
