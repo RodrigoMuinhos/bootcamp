@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { neon } from "@neondatabase/serverless";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 
 dotenv.config();
 
@@ -11,9 +13,30 @@ const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:3000").spli
 
 const sql = neon(process.env.DATABASE_URL);
 
+// Swagger configuration
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "CRM-Start Bootcamp API",
+      version: "1.0.0",
+      description: "API de leads, newsletter e analytics para o bootcamp CRM-Start",
+    },
+    servers: [
+      { url: "http://localhost:4000", description: "Local" },
+      { url: "https://bootcamp-backend-production.up.railway.app", description: "Production" },
+    ],
+  },
+  apis: ["./index.mjs"],
+};
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
 app.set("trust proxy", true);
 app.use(cors({ origin: allowedOrigins, credentials: false }));
 app.use(express.json());
+
+// Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 function getClientIp(req) {
   const xfwd = (req.headers["x-forwarded-for"] || "").split(",").map((ip) => ip.trim()).filter(Boolean);
@@ -71,6 +94,30 @@ app.get("/health", async (_req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/lead:
+ *   get:
+ *     summary: Lista todos os leads cadastrados
+ *     description: Retorna uma lista de até 200 leads com informações de inscrição
+ *     tags: [Leads]
+ *     responses:
+ *       200:
+ *         description: Lista de leads
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 leads:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 total:
+ *                   type: number
+ *       500:
+ *         description: Erro ao buscar leads
+ */
 app.get("/api/lead", async (_req, res) => {
   try {
     const leads = await sql`
@@ -86,6 +133,43 @@ app.get("/api/lead", async (_req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/lead:
+ *   post:
+ *     summary: Criar novo lead
+ *     description: Inscreve um novo lead com validação de CPF e dados de contato
+ *     tags: [Leads]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: João Silva
+ *               email:
+ *                 type: string
+ *                 example: joao@example.com
+ *               phone:
+ *                 type: string
+ *                 example: "11999999999"
+ *               cpf:
+ *                 type: string
+ *                 example: "12345678901"
+ *               experience:
+ *                 type: string
+ *                 example: iniciante
+ *     responses:
+ *       201:
+ *         description: Lead criado com sucesso
+ *       400:
+ *         description: Dados inválidos
+ *       500:
+ *         description: Erro ao salvar lead
+ */
 app.post("/api/lead", async (req, res) => {
   const { name, email, phone, cpf, experience } = req.body || {};
 
@@ -126,6 +210,31 @@ app.post("/api/lead", async (req, res) => {
 });
 
 // Newsletter subscription
+/**
+ * @swagger
+ * /api/newsletter:
+ *   post:
+ *     summary: Inscrever na newsletter
+ *     description: Cadastra um email para receber a newsletter
+ *     tags: [Newsletter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: usuario@example.com
+ *     responses:
+ *       201:
+ *         description: Email inscrito na newsletter
+ *       400:
+ *         description: Email obrigatório
+ *       500:
+ *         description: Erro ao salvar inscrição
+ */
 app.post("/api/newsletter", async (req, res) => {
   const { email } = req.body || {};
   if (!email) {
@@ -145,6 +254,21 @@ app.post("/api/newsletter", async (req, res) => {
 });
 
 // Visita única por IP
+/**
+ * @swagger
+ * /api/visit:
+ *   post:
+ *     summary: Registrar visita única por IP
+ *     description: Registra uma visita única por endereço IP (não duplica)
+ *     tags: [Analytics]
+ *     responses:
+ *       200:
+ *         description: Visita registrada (ou já existia)
+ *       400:
+ *         description: IP não identificado
+ *       500:
+ *         description: Erro ao registrar visita
+ */
 app.post("/api/visit", async (req, res) => {
   const ip = getClientIp(req);
   if (!ip) return res.status(400).json({ error: "IP não identificado" });
@@ -164,6 +288,21 @@ app.post("/api/visit", async (req, res) => {
 });
 
 // Registro de cliques no CTA "Garantir minha vaga"
+/**
+ * @swagger
+ * /api/cta-click:
+ *   post:
+ *     summary: Registrar clique no CTA
+ *     description: Registra um clique no botão "Garantir minha vaga" com IP do usuário
+ *     tags: [Analytics]
+ *     responses:
+ *       201:
+ *         description: Clique registrado
+ *       400:
+ *         description: IP não identificado
+ *       500:
+ *         description: Erro ao registrar clique
+ */
 app.post("/api/cta-click", async (req, res) => {
   const ip = getClientIp(req);
   if (!ip) return res.status(400).json({ error: "IP não identificado" });
