@@ -55,11 +55,7 @@ export function Header() {
         </div>
 
         {/* Countdown Section - Responsive */}
-        <div className="flex items-center gap-2 sm:gap-3 ml-auto">
-          <div className="hidden md:flex items-center gap-2 text-xs sm:text-sm">
-            <AlarmClock className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-            <span className="font-medium whitespace-nowrap">Termina em:</span>
-          </div>
+        <div className="flex items-center gap-1 sm:gap-2 ml-auto">
           {ended ? (
             <div className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-destructive text-destructive-foreground text-xs sm:text-sm font-semibold whitespace-nowrap">
               Encerrada

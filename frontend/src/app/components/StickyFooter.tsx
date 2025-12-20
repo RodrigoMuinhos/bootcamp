@@ -1,14 +1,27 @@
 'use client';
 
 import { Clock, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface StickyFooterProps {
   onOpenModal: () => void;
 }
 
 export function StickyFooter({ onOpenModal }: StickyFooterProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 30000); // 30 segundos
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-[#FF6B35] via-[#F7347A] to-[#FF006E] shadow-2xl border-t border-primary/20">
+    <div className={`fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-[#FF6B35] via-[#F7347A] to-[#FF006E] shadow-2xl border-t border-primary/20 transition-all duration-500 ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3 sm:py-4 gap-4">
           {/* Info Section - Hidden on mobile, visible on tablet+ */}
