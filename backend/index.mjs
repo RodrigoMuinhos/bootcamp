@@ -11,6 +11,13 @@ const app = express();
 const port = process.env.PORT || 4000;
 const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:3000").split(",");
 
+// Validate DATABASE_URL
+if (!process.env.DATABASE_URL) {
+  console.error("ERROR: DATABASE_URL environment variable is not set!");
+  console.error("Available env vars:", Object.keys(process.env).filter(k => !k.includes('SECRET')));
+  process.exit(1);
+}
+
 const sql = neon(process.env.DATABASE_URL);
 
 // Swagger configuration
