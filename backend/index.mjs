@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
-const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:3000").split(",");
+const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : "*";
 
 // Validate DATABASE_URL
 if (!process.env.DATABASE_URL) {

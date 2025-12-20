@@ -77,19 +77,30 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         phone: onlyDigits(formData.phone),
         cpf: onlyDigits(formData.cpf),
       };
-      await fetch(`${API_BASE}/api/lead`, {
+      const response = await fetch(`${API_BASE}/api/lead`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log('Lead salvo com sucesso:', result);
+      
       setSubmitStatus('success');
+      setIsSubmitting(false);
+      
       setTimeout(() => {
         setFormData({ name: '', email: '', phone: '', cpf: '', experience: '' });
         setSubmitStatus('idle');
         onClose();
-      }, 2500);
+      }, 3000);
     } catch (err) {
       console.error('Erro ao salvar lead no backend', err);
+      alert('Erro ao enviar seus dados. Por favor, tente novamente.');
       setIsSubmitting(false);
     }
   };
