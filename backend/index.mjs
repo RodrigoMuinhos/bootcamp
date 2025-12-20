@@ -39,7 +39,15 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 app.set("trust proxy", true);
-app.use(cors({ origin: allowedOrigins, credentials: false }));
+
+// Configure CORS to accept all origins or specific ones
+const corsOptions = {
+  origin: allowedOrigins === "*" ? "*" : allowedOrigins,
+  credentials: false,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Swagger UI
