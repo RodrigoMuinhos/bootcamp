@@ -6,8 +6,6 @@ interface SignupModalProps {
   onClose: () => void;
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
-
 export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   const [formData, setFormData] = useState({
     name: '',
@@ -77,7 +75,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         phone: onlyDigits(formData.phone),
         cpf: onlyDigits(formData.cpf),
       };
-      const response = await fetch(`${API_BASE}/api/lead`, {
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

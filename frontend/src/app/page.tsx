@@ -18,22 +18,20 @@ import { SpecialGuest } from "./components/SpecialGuest";
 import { Journey } from "./components/Journey";
 import { Newsletter } from "./components/Newsletter";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
-
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${API_BASE}/api/visit`, { method: "POST", signal: controller.signal }).catch(() => {
+    fetch('/api/visit', { method: "POST", signal: controller.signal }).catch(() => {
       // falha de tracking não bloqueia a página
     });
     return () => controller.abort();
   }, []);
 
   const recordCtaClick = () => {
-    fetch(`${API_BASE}/api/cta-click`, { method: "POST" }).catch(() => {
+    fetch('/api/cta-click', { method: "POST" }).catch(() => {
       // falha de tracking não bloqueia a abertura do modal
     });
   };

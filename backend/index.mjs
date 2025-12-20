@@ -42,12 +42,27 @@ app.set("trust proxy", true);
 
 // Configure CORS to accept all origins or specific ones
 const corsOptions = {
-  origin: allowedOrigins === "*" ? "*" : allowedOrigins,
-  credentials: false,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow all origins from allowedOrigins or any origin if "*"
+    if (allowedOrigins === "*") {
+      return callback(null, true);
+    }
+    
+    // Check if origin is in allowed list
+    const allowed = allowedOrigins.some(o => origin.includes(o) || o === origin);
+    callback(allowed ? null : new Error('Not allowed by CORS'), allowed);
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  maxAge: 86400, // 24 hours
 };
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight for all routes
 app.use(express.json());
 
 // Swagger UI

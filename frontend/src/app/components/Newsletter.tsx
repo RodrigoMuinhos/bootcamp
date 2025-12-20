@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { Mail, Rocket } from 'lucide-react';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
-
 export function Newsletter() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -14,7 +12,7 @@ export function Newsletter() {
     if (!email) return;
     setStatus('loading');
     try {
-      const res = await fetch(`${API_BASE}/api/newsletter`, {
+      const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

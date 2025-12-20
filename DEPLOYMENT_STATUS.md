@@ -75,11 +75,21 @@ Route (app)                    Size        First Load JS
 
 ## 🔧 Configuration Ready
 
-### Environment Variables (Ready)
-Frontend needs to be configured in Vercel:
+### Environment Variables (Updated)
+
+**Backend (Railway):**
 ```
-NEXT_PUBLIC_API_BASE_URL=https://bootcamp-backend-production.up.railway.app
+DATABASE_URL=your_neon_database_url
+PORT=4000
+CORS_ORIGIN=*
 ```
+
+**Frontend (Vercel):**
+```
+BACKEND_URL=https://bootcamp-backend-production.up.railway.app
+```
+
+⚠️ **IMPORTANTE**: Variável mudou de `NEXT_PUBLIC_API_BASE_URL` para `BACKEND_URL` (server-side only)
 
 ### Docker Configuration (Ready)
 - ✅ `docker-compose.yml` - Local development orchestration
@@ -95,13 +105,18 @@ NEXT_PUBLIC_API_BASE_URL=https://bootcamp-backend-production.up.railway.app
 
 ## 🚀 Next Steps for Vercel Deployment
 
+### ⚠️ CORS Issue Fixed (20/12/2025)
+**Problema resolvido**: Implementadas API Routes no Next.js para evitar CORS.
+Ver detalhes completos em: [DEPLOY_GUIDE.md](./DEPLOY_GUIDE.md)
+
 ### Step 1: Add Environment Variable in Vercel
 1. Go to Vercel Dashboard → Select "bootcamp-page" project
 2. Navigate to Settings → Environment Variables
 3. Add new variable:
-   - **Name**: `NEXT_PUBLIC_API_BASE_URL`
+   - **Name**: `BACKEND_URL`
    - **Value**: `https://bootcamp-backend-production.up.railway.app`
-4. Save and trigger redeployment
+4. Apply to: Production, Preview, Development
+5. Save and trigger redeployment
 
 ### Step 2: Deploy Frontend
 1. Vercel will automatically rebuild with the environment variable
@@ -126,7 +141,8 @@ NEXT_PUBLIC_API_BASE_URL=https://bootcamp-backend-production.up.railway.app
 - [x] Security patches applied (CVE fixes)
 - [x] Docker configuration optimized
 - [x] Git repository clean and up to date
-- [ ] NEXT_PUBLIC_API_BASE_URL configured in Vercel
+- [x] CORS issue resolved with API Routes
+- [ ] BACKEND_URL configured in Vercel
 - [ ] Frontend deployed to Vercel
 - [ ] End-to-end testing completed
 
