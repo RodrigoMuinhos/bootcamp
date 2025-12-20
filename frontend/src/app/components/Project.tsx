@@ -12,7 +12,7 @@ export function Project() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
+    <section id="projeto" className="py-16 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
       <div className="max-w-7xl mx-auto px-6">

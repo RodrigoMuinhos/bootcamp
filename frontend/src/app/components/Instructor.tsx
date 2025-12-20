@@ -21,7 +21,7 @@ export function Instructor() {
   ];
 
   return (
-    <section className="py-16 bg-[#111827] relative overflow-hidden">
+    <section id="instrutor" className="py-16 bg-[#111827] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
 

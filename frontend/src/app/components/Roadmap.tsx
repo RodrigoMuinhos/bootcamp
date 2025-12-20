@@ -176,7 +176,7 @@ const weeks: Week[] = [
 
 export function Roadmap({ onClose }: RoadmapProps) {
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-background">
+    <div id="roadmap" className="fixed inset-0 z-50 overflow-y-auto bg-background">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-gradient-to-r from-primary to-accent border-b border-border backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-6">
