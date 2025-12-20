@@ -4,7 +4,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 export function Project() {
   const features = [
     { icon: Users, label: "Gestão de Clientes" },
-    { icon: Calendar, label: "Agenday" },
+    { icon: Calendar, label: "Agenda" },
     { icon: Globe, label: "API REST" },
     { icon: Lock, label: "Auth" },
     { icon: Server, label: "Deploy em Cloud" },

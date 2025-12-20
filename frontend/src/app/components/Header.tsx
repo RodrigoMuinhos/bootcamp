@@ -43,14 +43,14 @@ export function Header() {
   return (
     <div className="sticky top-0 z-50 w-full border-b border-border bg-gradient-to-r from-[#FF6B35]/20 via-[#F7347A]/15 to-[#FF006E]/10 backdrop-blur supports-[backdrop-filter]:via-card/50 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-        {/* Logo Section - Responsive */}
+        {/* Logo Section - Always visible */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-fit">
           <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary to-accent text-white flex-shrink-0">
             <Code2 className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div className="leading-tight hidden sm:block">
-            <div className="text-sm sm:text-base font-semibold">CRM-Startweb</div>
-            <div className="text-xs text-muted-foreground">Bootcamp Full Stack</div>
+          <div className="leading-tight">
+            <div className="text-xs sm:text-sm sm:text-base font-semibold">CRM-Startweb</div>
+            <div className="text-[10px] sm:text-xs text-muted-foreground">Bootcamp Full Stack</div>
           </div>
         </div>
 
@@ -77,8 +77,6 @@ export function Header() {
               <div className="flex flex-col items-center px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-primary/10 border border-primary/20">
                 <span className="text-sm sm:text-lg font-bold tabular-nums">{seconds.toString().padStart(2, '0')}</span>
                 <span className="text-[8px] sm:text-[10px] text-muted-foreground">S</span>
-                <span className="text-lg font-bold tabular-nums">{seconds.toString().padStart(2, '0')}</span>
-                <span className="text-[10px] text-muted-foreground">SEG</span>
               </div>
             </div>
           )}
