@@ -47,7 +47,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-background pb-20 sm:pb-24">
+    <div className="min-h-screen w-full bg-background pb-16 sm:pb-20 md:pb-24">
       <Header />
       <Hero onOpenModal={handleOpenModal} onShowRoadmap={() => setShowRoadmap(true)} />
       <Problem />

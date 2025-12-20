@@ -122,51 +122,51 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   if (submitStatus === 'success') {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full p-8 text-center animate-in fade-in zoom-in duration-200">
+        <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 text-center animate-in fade-in zoom-in duration-200 mx-4">
           <div className="flex justify-center mb-6">
-            <div className="relative w-20 h-20">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full animate-spin opacity-20"></div>
               <div className="absolute inset-2 bg-background rounded-full flex items-center justify-center">
-                <CheckCircle className="w-10 h-10 text-accent animate-bounce" />
+                <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-accent animate-bounce" />
               </div>
             </div>
           </div>
-          <h3 className="text-2xl font-bold mb-2">Inscrição Recebida!</h3>
-          <p className="text-muted-foreground mb-6">
+          <h3 className="text-xl sm:text-2xl font-bold mb-2">Inscrição Recebida!</h3>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6">
             Seus dados foram salvos com sucesso. Em breve entraremos em contato pelo WhatsApp para confirmar sua participação.
           </p>
-          <p className="text-sm text-muted-foreground/60">Aguarde...</p>
+          <p className="text-xs sm:text-sm text-muted-foreground/60">Aguarde...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200 my-4 sm:my-8 mx-4">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-muted rounded-lg transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 hover:bg-muted rounded-lg transition-colors z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-accent p-8 rounded-t-2xl text-white">
+        <div className="bg-gradient-to-r from-primary to-accent p-6 sm:p-8 rounded-t-2xl text-white">
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
-              <Rocket className="w-6 h-6" />
+            <div className="p-2 sm:p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+              <Rocket className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h2 className="text-2xl font-bold">Garantir Minha Vaga</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Garantir Minha Vaga</h2>
           </div>
-          <p className="text-white/90">
+          <p className="text-sm sm:text-base text-white/90">
             Preencha os dados abaixo e fale diretamente conosco no WhatsApp!
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8 space-y-5">
+        <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4 sm:space-y-5">
           <div>
             <label className="flex items-center gap-2 text-sm font-medium mb-2">
               <User className="w-4 h-4 text-primary" />
@@ -179,7 +179,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               onChange={handleChange}
               required
               placeholder="Digite seu nome completo"
-              className="w-full px-4 py-3 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             />
           </div>
 
@@ -195,7 +195,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               onChange={handleChange}
               required
               placeholder="seu@email.com"
-              className="w-full px-4 py-3 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             />
           </div>
 
@@ -211,7 +211,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               onChange={handleChange}
               required
               placeholder="(11) 99999-9999"
-              className="w-full px-4 py-3 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             />
             {!phoneIsValid && formData.phone && (
               <p className="text-xs text-destructive mt-1">Informe um número válido com DDD.</p>
@@ -230,7 +230,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               onChange={handleChange}
               required
               placeholder="000.000.000-00"
-              className="w-full px-4 py-3 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             />
             {formData.cpf && !cpfIsValid && (
               <p className="text-xs text-destructive mt-1">CPF inválido. Verifique e tente novamente.</p>
@@ -246,7 +246,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               value={formData.experience}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
             >
               <option value="">Selecione...</option>
               <option value="Iniciante - Nunca programei">Iniciante - Nunca programei</option>
@@ -259,9 +259,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
           <button
             type="submit"
             disabled={isSubmitting || !cpfIsValid || !phoneIsValid}
-            className="w-full px-6 py-4 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-lg shadow-primary/25 font-semibold disabled:opacity-70"
+            className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-primary/25 font-semibold disabled:opacity-70"
           >
-            <Phone className="w-5 h-5" />
+            <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
             {isSubmitting ? 'Enviando...' : 'Solicitar Inscrição'}
           </button>
 

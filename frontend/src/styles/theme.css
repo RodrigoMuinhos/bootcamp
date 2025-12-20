@@ -14,8 +14,9 @@
   --secondary-foreground: #FFFFFF;
   --muted: #1E293B;
   --muted-foreground: #94A3B8;
-  --accent: #FF8C42;
+  --accent: #F7347A;
   --accent-foreground: #FFFFFF;
+  --accent-pink: #FF006E;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.1);

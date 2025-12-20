@@ -8,11 +8,12 @@ export function FinalCTA({ onOpenModal }: FinalCTAProps) {
   return (
     <section className="py-20 bg-gradient-to-b from-[#0A0E1A] to-background relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,107,53,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,140,66,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,107,53,0.12),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(247,52,122,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,0,110,0.08),transparent_50%)]"></div>
 
       <div className="max-w-5xl mx-auto px-6 relative">
-        <div className="bg-gradient-to-br from-primary via-primary/90 to-accent rounded-3xl p-12 lg:p-16 shadow-2xl shadow-primary/20">
+        <div className="bg-gradient-to-br from-[#FF6B35] via-[#F7347A] to-[#FF006E] rounded-3xl p-12 lg:p-16 shadow-2xl shadow-primary/20">
           <div className="text-center space-y-8">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-6 py-3 backdrop-blur-sm">
               <Zap className="w-5 h-5 text-yellow-300" />

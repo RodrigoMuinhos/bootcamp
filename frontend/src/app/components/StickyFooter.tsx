@@ -8,7 +8,7 @@ interface StickyFooterProps {
 
 export function StickyFooter({ onOpenModal }: StickyFooterProps) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-primary via-primary/95 to-accent shadow-2xl border-t border-primary/20">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-[#FF6B35] via-[#F7347A] to-[#FF006E] shadow-2xl border-t border-primary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3 sm:py-4 gap-4">
           {/* Info Section - Hidden on mobile, visible on tablet+ */}

@@ -41,7 +41,7 @@ export function Header() {
   const ended = remaining <= 0;
 
   return (
-    <div className="sticky top-0 z-50 border-b border-border bg-gradient-to-r from-primary/20 via-card/70 to-accent/20 backdrop-blur supports-[backdrop-filter]:via-card/50">
+    <div className="sticky top-0 z-50 border-b border-border bg-gradient-to-r from-[#FF6B35]/20 via-[#F7347A]/15 to-[#FF006E]/10 backdrop-blur supports-[backdrop-filter]:via-card/50">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-gradient-to-br from-primary to-accent text-white">
