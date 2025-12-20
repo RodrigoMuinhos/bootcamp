@@ -17,6 +17,7 @@ import { SpecialClass } from "./components/SpecialClass";
 import { SpecialGuest } from "./components/SpecialGuest";
 import { Journey } from "./components/Journey";
 import { Newsletter } from "./components/Newsletter";
+import { StickyFooter } from "./components/StickyFooter";
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +47,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-background">
+    <div className="min-h-screen w-full bg-background pb-20 sm:pb-24">
       <Header />
       <Hero onOpenModal={handleOpenModal} onShowRoadmap={() => setShowRoadmap(true)} />
       <Problem />
@@ -61,6 +62,9 @@ export default function Page() {
       <FAQ />
       <FinalCTA onOpenModal={handleOpenModal} />
       <Footer />
+
+      {/* Sticky Footer - Always visible at bottom */}
+      <StickyFooter onOpenModal={handleOpenModal} />
 
       <SignupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
