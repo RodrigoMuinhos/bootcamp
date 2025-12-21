@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 dotenv.config();
 
@@ -21,21 +21,15 @@ if (!process.env.DATABASE_URL) {
 
 const sql = neon(process.env.DATABASE_URL);
 
-// Configuração do Nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
-});
+// Configuração do Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Função para enviar notificação de novo cadastro
 async function sendNewLeadNotification(leadName, leadEmail, leadPhone, leadCPF) {
   try {
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'rodrigomuinhodev@gmail.com',
+    await resend.emails.send({
+      from: 'Bootcamp <onboarding@resend.dev>',
+      to: 'rodrigomuinhostattooist@gmail.com',
       subject: '🎉 Novo Cadastro no Bootcamp!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -49,10 +43,8 @@ async function sendNewLeadNotification(leadName, leadEmail, leadPhone, leadCPF) 
           <p style="color: #6B7280; font-size: 14px;">Esta é uma notificação automática do sistema de cadastro do Bootcamp.</p>
         </div>
       `
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log('Email de notificação enviado com sucesso!');
+    });
+    console.log('Email de notificação enviado com sucesso via Resend!');
   } catch (error) {
     console.error('Erro ao enviar email de notificação:', error);
     // Não vamos falhar o cadastro se o email falhar
