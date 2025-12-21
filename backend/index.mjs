@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { neon } from "@neondatabase/serverless";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -19,6 +20,44 @@ if (!process.env.DATABASE_URL) {
 }
 
 const sql = neon(process.env.DATABASE_URL);
+
+// Configuração do Nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+// Função para enviar notificação de novo cadastro
+async function sendNewLeadNotification(leadName, leadEmail, leadPhone, leadCPF) {
+  try {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: 'rodrigomuinhodev@gmail.com',
+      subject: '🎉 Novo Cadastro no Bootcamp!',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #4F46E5;">Você recebeu um novo cadastro!</h2>
+          <div style="background-color: #F3F4F6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong>Nome:</strong> ${leadName}</p>
+            <p style="margin: 10px 0;"><strong>Email:</strong> ${leadEmail}</p>
+            ${leadPhone ? `<p style="margin: 10px 0;"><strong>Telefone:</strong> ${leadPhone}</p>` : ''}
+            ${leadCPF ? `<p style="margin: 10px 0;"><strong>CPF:</strong> ${leadCPF}</p>` : ''}
+          </div>
+          <p style="color: #6B7280; font-size: 14px;">Esta é uma notificação automática do sistema de cadastro do Bootcamp.</p>
+        </div>
+      `
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('Email de notificação enviado com sucesso!');
+  } catch (error) {
+    console.error('Erro ao enviar email de notificação:', error);
+    // Não vamos falhar o cadastro se o email falhar
+  }
+}
 
 // Swagger configuration
 const swaggerOptions = {
@@ -227,11 +266,34 @@ app.post("/api/lead", async (req, res) => {
   }
 
   try {
+    // Verificar se já existe um lead com o mesmo email
+    const existingEmail = await sql`
+      SELECT id FROM leads WHERE email = ${email} LIMIT 1;
+    `;
+    if (existingEmail.length > 0) {
+      return res.status(400).json({ error: "Este email já está cadastrado" });
+    }
+
+    // Verificar se já existe um lead com o mesmo CPF (se CPF foi fornecido)
+    if (cpf) {
+      const cpfDigits = onlyDigits(cpf);
+      const existingCPF = await sql`
+        SELECT id FROM leads WHERE cpf = ${cpfDigits} LIMIT 1;
+      `;
+      if (existingCPF.length > 0) {
+        return res.status(400).json({ error: "Este CPF já está cadastrado" });
+      }
+    }
+
     const inserted = await sql`
       INSERT INTO leads (name, email, phone, cpf, experience)
       VALUES (${name}, ${email}, ${phone || null}, ${cpf || null}, ${experience || null})
       RETURNING id, name, email, phone, cpf, experience, created_at;
     `;
+    
+    // Enviar notificação por email
+    await sendNewLeadNotification(name, email, phone, cpf);
+    
     res.status(201).json({ lead: inserted[0] });
   } catch (err) {
     console.error("Erro salvando lead", err);
