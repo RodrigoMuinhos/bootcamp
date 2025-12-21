@@ -142,21 +142,22 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200 my-4 sm:my-8 mx-4">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 hover:bg-muted rounded-lg transition-colors z-10"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div className="min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6">
+        <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200 my-4 sm:my-8 mx-auto max-h-[95vh] flex flex-col">
+          {/* Close button - Fixed and visible */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-red-500/20 rounded-full transition-all z-50 bg-background/80 backdrop-blur-sm border border-border shadow-lg group"
+          >
+            <X className="w-5 h-5 text-foreground group-hover:text-red-500" />
+          </button>
 
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-accent p-6 sm:p-8 rounded-t-2xl text-white">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 sm:p-3 bg-white/20 rounded-xl backdrop-blur-sm">
-              <Rocket className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* Header - Sticky */}
+          <div className="bg-gradient-to-r from-primary to-accent p-6 sm:p-8 rounded-t-2xl text-white flex-shrink-0">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 sm:p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                <Rocket className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <h2 className="text-xl sm:text-2xl font-bold">Garantir Minha Vaga</h2>
           </div>
@@ -165,8 +166,8 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4 sm:space-y-5">
+        {/* Form - Scrollable */}
+        <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4 sm:space-y-5 overflow-y-auto flex-1">
           <div>
             <label className="flex items-center gap-2 text-sm font-medium mb-2">
               <User className="w-4 h-4 text-primary" />
@@ -269,6 +270,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             Ao enviar, você será redirecionado para o WhatsApp para falar com nossa equipe.
           </p>
         </form>
+        </div>
       </div>
     </div>
   );
