@@ -21,11 +21,16 @@ if (!process.env.DATABASE_URL) {
 
 const sql = neon(process.env.DATABASE_URL);
 
-// Configuração do Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Configuração do Resend (opcional)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Função para enviar notificação de novo cadastro
 async function sendNewLeadNotification(leadName, leadEmail, leadPhone, leadCPF) {
+  if (!resend) {
+    console.log('Resend não configurado. Email de notificação não será enviado.');
+    return;
+  }
+  
   try {
     await resend.emails.send({
       from: 'Bootcamp <onboarding@resend.dev>',
