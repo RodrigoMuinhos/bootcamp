@@ -50,7 +50,7 @@ export function Header() {
           </div>
           <div className="leading-tight">
             <div className="text-xs sm:text-sm sm:text-base font-semibold">CRM-Startweb</div>
-            <div className="text-[10px] sm:text-xs text-muted-foreground">Bootcamp Full Stack</div>
+            <div className="text-[10px] sm:text-xs text-muted-foreground">Bootcamp de Desenvolvimento</div>
           </div>
         </div>
 

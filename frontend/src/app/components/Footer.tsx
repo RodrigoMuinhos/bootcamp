@@ -18,7 +18,7 @@ export function Footer() {
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">CRM-Start</span>
             </h3>
             <p className="text-sm text-muted-foreground mt-2">
-              Bootcamp completo de desenvolvimento Full Stack: do zero ao deploy em produção.
+              Bootcamp completo de desenvolvimento: do zero ao deploy em produção.
             </p>
             <div className="mt-4 space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-primary" /> Início: Janeiro 2025</div>

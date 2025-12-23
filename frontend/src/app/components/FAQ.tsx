@@ -33,7 +33,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "E quanto a emprego após o bootcamp?",
-    answer: "Não prometemos emprego. O que fazemos é preparar você com habilidades técnicas sólidas e um projeto real para o mercado. Você sairá com conhecimento em Full Stack, experiência em deploy e um portfólio profissional. O resto depende do seu desempenho, dedicação e de como você se posiciona no mercado."
+    answer: "Não prometemos emprego. O que fazemos é preparar você com habilidades técnicas sólidas e um projeto real para o mercado. Você sairá com conhecimento em desenvolvimento, experiência em deploy e um portfólio profissional. O resto depende do seu desempenho, dedicação e de como você se posiciona no mercado."
   },
   {
     question: "Como posso tirar dúvidas durante o bootcamp?",

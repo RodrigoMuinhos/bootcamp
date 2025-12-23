@@ -127,7 +127,7 @@ const weeks: Week[] = [
       "Variáveis de ambiente",
       "Diferença entre dev, staging e prod"
     ],
-    delivery: "Sistema full stack rodando com um comando"
+    delivery: "Sistema rodando com um comando"
   },
   {
     number: 10,
@@ -183,7 +183,7 @@ export function Roadmap({ onClose }: RoadmapProps) {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">Roadmap — CRM-Start Bootcamp</h1>
-              <p className="text-white/80">Do Zero ao Deploy • Full Stack • 12 Semanas</p>
+              <p className="text-white/80">Do Zero ao Deploy • 12 Semanas</p>
             </div>
             <button
               onClick={onClose}
