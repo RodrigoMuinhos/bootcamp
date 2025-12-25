@@ -17,15 +17,9 @@ export function SpecialClass() {
 
         {/* LinkedIn-style card */}
         <div className="bg-gradient-to-br from-card via-secondary to-card border border-accent/30 rounded-2xl overflow-hidden relative">
-          {/* Cover image - NTSEC Banner */}
-          <div className="h-40 bg-cover bg-center relative overflow-hidden">
-            <img src="/ntsec.jpeg" alt="NTSEC Banner" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 opacity-90"></div>
-          </div>
-
-          <div className="px-8 pb-8 relative">
+          <div className="px-8 pt-8 pb-8 relative">
             {/* Profile picture - destaque */}
-            <div className="relative -mt-24 mb-8 flex flex-col items-start">
+            <div className="relative mb-8 flex flex-col items-start">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-primary/30 rounded-full blur-3xl -z-10 w-56 h-56"></div>
               <div className="w-48 h-48 rounded-full bg-gradient-to-br from-accent to-primary p-2 shadow-2xl shadow-accent/40">
                 <div className="w-full h-full rounded-full bg-card overflow-hidden flex items-center justify-center border-4 border-background">
