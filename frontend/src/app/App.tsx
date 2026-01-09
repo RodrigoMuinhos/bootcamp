@@ -11,11 +11,23 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { SignupModal } from './components/SignupModal';
 import { Roadmap } from './components/Roadmap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showRoadmap, setShowRoadmap] = useState(false);
+
+  useEffect(() => {
+    const syncRoadmapFromHash = () => {
+      if (window.location.hash === '#roadmap') {
+        setShowRoadmap(true);
+      }
+    };
+
+    syncRoadmapFromHash();
+    window.addEventListener('hashchange', syncRoadmapFromHash);
+    return () => window.removeEventListener('hashchange', syncRoadmapFromHash);
+  }, []);
 
   if (showRoadmap) {
     return <Roadmap onClose={() => setShowRoadmap(false)} />;

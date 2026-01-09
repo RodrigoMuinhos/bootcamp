@@ -24,6 +24,18 @@ export default function Page() {
   const [showRoadmap, setShowRoadmap] = useState(false);
 
   useEffect(() => {
+    const syncRoadmapFromHash = () => {
+      if (window.location.hash === '#roadmap') {
+        setShowRoadmap(true);
+      }
+    };
+
+    syncRoadmapFromHash();
+    window.addEventListener('hashchange', syncRoadmapFromHash);
+    return () => window.removeEventListener('hashchange', syncRoadmapFromHash);
+  }, []);
+
+  useEffect(() => {
     const controller = new AbortController();
     fetch('/api/visit', { method: "POST", signal: controller.signal }).catch(() => {
       // falha de tracking não bloqueia a página

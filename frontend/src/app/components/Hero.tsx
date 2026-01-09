@@ -115,7 +115,7 @@ export function Hero({ onOpenModal, onShowRoadmap }: HeroProps) {
                 <div className="text-xs sm:text-sm text-muted-foreground">Semanas</div>
               </div>
               <div className="border-l-2 border-primary pl-2 sm:pl-4">
-                <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-primary leading-tight">Desenvolvimento</div>
+                <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-primary leading-tight">Evolução</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Backend + Frontend</div>
               </div>
               <div className="border-l-2 border-accent pl-2 sm:pl-4">

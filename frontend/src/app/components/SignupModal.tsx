@@ -1,5 +1,5 @@
 import { X, Rocket, Phone, Mail, User, Fingerprint, CheckCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -7,6 +7,9 @@ interface SignupModalProps {
 }
 
 export function SignupModal({ isOpen, onClose }: SignupModalProps) {
+  const SUCCESS_AUTO_CLOSE_MS = 10_000;
+  const SUCCESS_COUNTDOWN_SECONDS = Math.ceil(SUCCESS_AUTO_CLOSE_MS / 1000);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,8 +19,38 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
+  const [successSecondsLeft, setSuccessSecondsLeft] = useState<number | null>(null);
 
   if (!isOpen) return null;
+
+  const resetAndClose = () => {
+    setFormData({ name: '', email: '', phone: '', cpf: '', experience: '' });
+    setSubmitStatus('idle');
+    setSuccessSecondsLeft(null);
+    onClose();
+  };
+
+  useEffect(() => {
+    if (submitStatus !== 'success') return;
+
+    setSuccessSecondsLeft(SUCCESS_COUNTDOWN_SECONDS);
+
+    const intervalId = window.setInterval(() => {
+      setSuccessSecondsLeft((prev) => {
+        if (prev == null) return prev;
+        return Math.max(prev - 1, 0);
+      });
+    }, 1000);
+
+    const timeoutId = window.setTimeout(() => {
+      resetAndClose();
+    }, SUCCESS_AUTO_CLOSE_MS);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.clearTimeout(timeoutId);
+    };
+  }, [SUCCESS_AUTO_CLOSE_MS, SUCCESS_COUNTDOWN_SECONDS, submitStatus]);
 
   const onlyDigits = (s: string) => s.replace(/\D/g, '');
 
@@ -90,12 +123,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
       
       setSubmitStatus('success');
       setIsSubmitting(false);
-      
-      setTimeout(() => {
-        setFormData({ name: '', email: '', phone: '', cpf: '', experience: '' });
-        setSubmitStatus('idle');
-        onClose();
-      }, 3000);
     } catch (err) {
       console.error('Erro ao salvar lead no backend', err);
       alert('Erro ao enviar seus dados. Por favor, tente novamente.');
@@ -135,7 +162,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
           <p className="text-sm sm:text-base text-muted-foreground mb-6">
             Seus dados foram salvos com sucesso. Em breve entraremos em contato pelo WhatsApp para confirmar sua participação.
           </p>
-          <p className="text-xs sm:text-sm text-muted-foreground/60">Aguarde...</p>
+          <p className="text-xs sm:text-sm text-muted-foreground/60">
+            {successSecondsLeft == null ? 'Aguarde...' : `Fechando em ${successSecondsLeft}s...`}
+          </p>
         </div>
       </div>
     );
