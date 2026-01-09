@@ -21,8 +21,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
   const [successSecondsLeft, setSuccessSecondsLeft] = useState<number | null>(null);
 
-  if (!isOpen) return null;
-
   const resetAndClose = () => {
     setFormData({ name: '', email: '', phone: '', cpf: '', experience: '' });
     setSubmitStatus('idle');
@@ -31,7 +29,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   };
 
   useEffect(() => {
-    if (submitStatus !== 'success') return;
+    if (!isOpen || submitStatus !== 'success') return;
 
     setSuccessSecondsLeft(SUCCESS_COUNTDOWN_SECONDS);
 
@@ -50,7 +48,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
       window.clearInterval(intervalId);
       window.clearTimeout(timeoutId);
     };
-  }, [SUCCESS_AUTO_CLOSE_MS, SUCCESS_COUNTDOWN_SECONDS, submitStatus]);
+  }, [SUCCESS_AUTO_CLOSE_MS, SUCCESS_COUNTDOWN_SECONDS, isOpen, submitStatus]);
+
+  if (!isOpen) return null;
 
   const onlyDigits = (s: string) => s.replace(/\D/g, '');
 
